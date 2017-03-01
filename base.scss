@@ -1,0 +1,441 @@
+// _base.scss
+
+
+// VARIABLES
+
+
+$sibyl_color: #ffab31;
+$sibyl_margin_color: #C4C4C4;
+$sibyl_separator_color: #DCDCDC;
+$sibyl_border_color: #d2d2d2;
+
+$app_font: 'Open Sans', sans-serif;
+
+
+// MIXINS
+
+@mixin z-index-sum($args) {
+  $i: 0;
+  $sum: 0;
+  @for $i from 1 through length($args) {
+    $curr_element: nth($args, $i);
+    $sum: calc(#{$sum} + #{$curr_element});
+  }
+  z-index: $sum !important;
+}
+
+@mixin app-font-light() {
+  font-family: $app_font;
+  font-weight: 300;
+}
+
+@mixin app-font-regular() {
+  font-family: $app_font;
+  font-weight: 500;
+}
+
+@mixin app-font-bold() {
+  font-family: $app_font;
+  font-weight: 800;
+}
+
+@mixin app-font-light-important() {
+  font-family: $app_font !important;
+  font-weight: 300;
+}
+
+@mixin app-font-regular-important() {
+  font-family: $app_font !important;
+  font-weight: 500;
+}
+
+@mixin app-font-bold-important() {
+  font-family: $app_font !important;
+  font-weight: 800;
+}
+@mixin accelerate-hardware($perspective...) {
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+  @if $perspective {
+    -webkit-perspective: $perspective;
+    -moz-perspective: $perspective;
+    -ms-perspective: $perspective;
+    perspective: $perspective;
+  }
+
+}
+
+
+@mixin placeholder-color($hex_code) {
+  &::-webkit-input-placeholder {
+    color: $hex_code;
+  }
+
+  &:-moz-placeholder { /* Firefox 18- */
+    color: $hex_code;
+  }
+
+  &::-moz-placeholder {  /* Firefox 19+ */
+    color: $hex_code;
+  }
+
+  &:-ms-input-placeholder {
+    color: $hex_code;
+  }
+}
+
+@mixin background-img($url) {
+  background-image: url($url);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@mixin background-icon($url) {
+  background-image: url($url);
+  background-repeat: no-repeat;
+  background-size:contain;
+  background-position: center;
+}
+
+@mixin background-img-svg($url, $width, $height) {
+  background-image: url($url);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+@mixin display-flex {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: -webkit-flex !important;
+  display: -moz-box !important;
+  display: flex !important;
+}
+@mixin display-flex-not-important {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: flex;
+}
+
+@mixin flex($number) {
+  -webkit-box-flex: $number;
+  -webkit-flex: $number;
+  -moz-box-flex: $number;
+  -ms-flex: $number;
+  flex: $number;
+}
+
+@mixin flex-flow($direction, $wrap) {
+  -webkit-flex-flow: $direction $wrap;
+  -moz-flex-flow: $direction $wrap;
+  -ms-flex-flow: $direction $wrap;
+  flex-flow: $direction $wrap;
+}
+
+@mixin justify-content($position) {
+  -webkit-justify-content: $position;
+  -moz-justify-content: $position;
+  -ms-justify-content: $position;
+  justify-content: $position;
+}
+
+@mixin align-items($position) {
+  -webkit-align-items: $position;
+  -moz-align-items: $position;
+  -ms-align-items: $position;
+  align-items: $position;
+}
+
+@mixin align-content($position) {
+  -webkit-align-content: $position;
+  -moz-align-content: $position;
+  -ms-align-content: $position;
+  align-content: $position;
+}
+
+@mixin align-self($position) {
+  -webkit-align-self: $position;
+  -moz-align-self: $position;
+  -ms-align-self: $position;
+  align-self: $position;
+}
+
+@mixin user-select($select) {
+  -webkit-touch-callout: $select !important;
+  -webkit-user-select: $select !important;
+  -khtml-user-select: $select !important;
+  -moz-user-select: $select !important;
+  -ms-user-select: $select !important;
+  user-select: $select !important;
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
+}
+
+@mixin border-corner-radius($tl, $tr, $br, $bl) {
+  -webkit-border-top-left-radius: $tl;
+  -moz-border-top-left-radius: $tl;
+  -ms-border-top-left-radius: $tl;
+  border-top-left-radius: $tl;
+
+  -webkit-border-top-right-radius: $tr;
+  -moz-border-top-right-radius: $tr;
+  -ms-border-top-right-radius: $tr;
+  border-top-right-radius: $tr;
+
+  -webkit-border-bottom-right-radius: $br;
+  -moz-border-bottom-right-radius: $br;
+  -ms-border-bottom-right-radius: $br;
+  border-bottom-right-radius: $br;
+
+  -webkit-border-bottom-left-radius: $bl;
+  -moz-border-bottom-left-radius: $bl;
+  -ms-border-bottom-left-radius: $bl;
+  border-bottom-left-radius: $bl;
+
+}
+
+@mixin border-radius-top-left-bottom-left($radius) {
+  border-radius: $radius 0px 0px $radius;
+  -moz-border-radius: $radius 0px 0px $radius;
+  -webkit-border-radius: $radius 0px 0px $radius;
+}
+
+@mixin border-radius-top-right-bottom-right($radius) {
+  -webkit-border-top-right-radius: $radius;
+  -webkit-border-bottom-right-radius: $radius;
+  -moz-border-radius-topright: $radius;
+  -moz-border-radius-bottomright: $radius;
+  border-top-right-radius: $radius;
+  border-bottom-right-radius: $radius;
+}
+
+@mixin border-radius-top-left-top-right($radius) {
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  -ms-border-radius: 0px;
+  border-radius: 0px;
+
+  -webkit-border-top-left-radius: $radius;
+  -webkit-border-top-right-radius: $radius;
+  -moz-border-radius-topleft: $radius;
+  -moz-border-radius-topright: $radius;
+  border-top-left-radius: $radius;
+  border-top-right-radius: $radius;
+}
+
+@mixin border-radius-bottom-left-bottom-right($radius) {
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  -ms-border-radius: 0px;
+  border-radius: 0px;
+
+  -webkit-border-bottom-right-radius: $radius;
+  -webkit-border-bottom-left-radius: $radius;
+  -moz-border-radius-bottomright: $radius;
+  -moz-border-radius-bottomleft: $radius;
+  border-bottom-right-radius: $radius;
+  border-bottom-left-radius: $radius;
+}
+
+@mixin transform($transform) {
+  -webkit-transform: $transform;
+  -moz-transform: $transform;
+  -ms-transform: $transform;
+  transform: $transform;
+}
+
+@mixin transition-dry ($param) {
+  transition: $param !important;
+  -webkit-transition: $param !important;
+  -o-transition: $param !important;
+  -moz-transition: $param !important;
+}
+
+@mixin transition-drag-box($time1, $time2) {
+  transition: all linear $time1, box-shadow linear $time2;
+  -webkit-transition: all linear $time1, box-shadow linear $time2;
+  -o-transition: all linear $time1, box-shadow linear $time2;
+  -moz-transition: all linear $time1, box-shadow linear $time2;
+}
+
+@mixin transition-cubic-bezier($object, $p1, $p2, $p3, $p4, $time) {
+  transition: $object cubic-bezier($p1, $p2, $p3, $p4) $time;
+  -webkit-transition: $object cubic-bezier($p1, $p2, $p3, $p4) $time;
+  -o-transition: $object cubic-bezier($p1, $p2, $p3, $p4) $time;
+  -moz-transition: $object cubic-bezier($p1, $p2, $p3, $p4) $time;
+}
+
+@mixin transition-predetermined($object, $type, $time) {
+  transition: $object $type $time !important;
+  -webkit-transition: $object $type $time !important;
+  -o-transition: $object $type $time !important;
+  -moz-transition: $object $type $time !important;
+}
+
+@mixin transition-two-properties($prop1, $function1, $time1, $prop2, $function2, $time2) {
+  transition: $prop1 $function1 $time1, $prop2 $function2 $time2 !important;
+  -webkit-transition: $prop1 $function1 $time1, $prop2 $function2 $time2 !important;
+  -o-transition: $prop1 $function1 $time1, $prop2 $function2 $time2 !important;
+  -moz-transition: $prop1 $function1 $time1, $prop2 $function2 $time2 !important;
+}
+
+@mixin transition-three-properties($prop1, $function1, $time1, $prop2, $function2, $time2, $prop3, $function3, $time3) {
+  transition: $prop1 $function1 $time1, $prop2 $function2 $time2, $prop3 $function3 $time3 !important;
+  -webkit-transition: $prop1 $function1 $time1, $prop2 $function2 $time2, $prop3 $function3 $time3 !important;
+  -o-transition: $prop1 $function1 $time1, $prop2 $function2 $time2, $prop3 $function3 $time3 !important;
+  -moz-transition: $prop1 $function1 $time1, $prop2 $function2 $time2, $prop3 $function3 $time3 !important;
+}
+
+@mixin box-shadow($h-shadow, $v-shadow, $blur, $spread, $color) {
+  -webkit-box-shadow: $h-shadow $v-shadow $blur $spread $color !important;
+  -moz-box-shadow: $h-shadow $v-shadow $blur $spread $color !important;
+  -ms-box-shadow: $h-shadow $v-shadow $blur $spread $color !important;
+  box-shadow: $h-shadow $v-shadow $blur $spread $color !important;
+}
+
+@mixin box-shadow-inset($h-shadow, $v-shadow, $blur, $spread, $color) {
+  -webkit-box-shadow: inset $h-shadow $v-shadow $blur $spread $color !important;
+  -moz-box-shadow: inset $h-shadow $v-shadow $blur $spread $color !important;
+  -ms-box-shadow: inset $h-shadow $v-shadow $blur $spread $color !important;
+  box-shadow: inset $h-shadow $v-shadow $blur $spread $color !important;
+}
+
+@mixin text-fill-color($color) {
+  -webkit-text-fill-color: $color;
+  -moz-text-fill-color: $color;
+  -o--text-fill-color: $color;
+  -ms-text-fill-color: $color;
+  text-fill-color: $color;
+}
+
+@mixin text-shadow($h-shadow, $v-shadow, $blur, $color) {
+  text-shadow: $h-shadow $v-shadow $blur $color;
+  -moz-text-shadow: $h-shadow $v-shadow $blur $color;
+  -webkit-text-shadow: $h-shadow $v-shadow $blur $color;
+}
+
+@mixin css-filter($value) {
+
+  filter: $value;
+  -webkit-filter: $value;
+}
+
+@mixin animation($name, $duration, $direction, $iteration_count, $timing_function, $delay) {
+  animation: $name;
+  animation-duration: $duration;
+  animation-direction: $direction;
+  animation-iteration-count: $iteration_count;
+  animation-timing-function: $timing_function;
+  animation-delay: $delay;
+  -webkit-animation: $name;
+  -webkit-animation-duration: $duration;
+  -webkit-animation-direction: $direction;
+  -webkit-animation-iteration-count: $iteration_count;
+  -webkit-animation-timing-function: $timing_function;
+  -webkit-animation-delay: $delay;
+}
+
+@mixin define-keyframe($name: 'anim', $initial-state: (), $end-state: ()) {
+  @keyframes #{$name}{
+
+    from {
+      @each $attr, $value in $initial-state {
+        #{$attr}: $value;
+      }
+    }
+    to {
+      @each $attr, $value in $end-state {
+        #{$attr}: $value;
+      }
+    }
+  }
+
+  @-webkit-keyframes #{$name}{
+
+    from {
+      @each $attr, $value in $initial-state {
+        #{$attr}: $value;
+      }
+    }
+    to {
+      @each $attr, $value in $end-state {
+        #{$attr}: $value;
+      }
+    }
+
+  }
+
+  @-moz-keyframes #{$name}{
+
+    from {
+      @each $attr, $value in $initial-state {
+        #{$attr}: $value;
+      }
+    }
+    to {
+      @each $attr, $value in $end-state {
+        #{$attr}: $value;
+      }
+    }
+
+  }
+
+  @-ms-keyframes #{$name}{
+
+    from {
+      @each $attr, $value in $initial-state {
+        #{$attr}: $value;
+      }
+    }
+    to {
+      @each $attr, $value in $end-state {
+        #{$attr}: $value;
+      }
+    }
+
+  }
+
+  @-o-keyframes #{$name}{
+
+    from {
+      @each $attr, $value in $initial-state {
+        #{$attr}: $value;
+      }
+    }
+    to {
+      @each $attr, $value in $end-state {
+        #{$attr}: $value;
+      }
+    }
+
+  }
+}
+
+
+
+// CLASSES
+
+.hidden {
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Chrome/Safari/Opera */
+  -khtml-user-select: none; /* Konqueror */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE/Edge */
+  user-select: none;
+  /* non-prefixed version, currently not supported by any browser */
+}
