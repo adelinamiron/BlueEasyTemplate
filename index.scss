@@ -12,7 +12,7 @@ body {
   #navbar_container {
     height: 130px;
     width: 100%;
-    background-color: rgba(81, 95, 103, 0.8);
+    background-color: rgba(20, 155, 233, 0.8);
     @include display-flex();
     @include flex-flow(row, nowrap);
     @include justify-content(center);
@@ -26,7 +26,7 @@ body {
 
       #header_logo {
         background-image: url(pictures/logo.png);
-        width: 127px;
+        width: 125px;
         height: 23px;
         margin-top: auto;
         margin-bottom: auto;
